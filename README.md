@@ -6,5 +6,55 @@
 4. Saja Nader 
 ### project description
 
-Iris is a voice-controlled pretty smart personal digital assistant, The idea is that you talk to her as you would a friend and she aims to help you get things done,
-she is designed to offer you a seamless way of interacting with your daily life,You can ask her questions, tell her to show you something or issue her with commands for her to execute on your behalf, hands-free.
+Iris is a virtual assistant  agent that can perform tasks or services for an individual based on commands or questions.
+This project can be an audio assistant on your operating system and perform the tasks that you are considering for it. You can use different scripts to use in the language interface..
+
+### Features
+* Greetings & showing features 
+* Time and date
+* It uses Google's speech to text and text to speech engines to interact with the users.
+* It can open some website for you such as Google, youtube, etc. Just say " open Google for me" and see the magic..
+* It can provides you with Weather forecasting
+* It can send emails for for any one 
+* It can send SMS to your contacts 
+* It can read for you a whole book
+* It can write your notes and show it for you 
+* It can tell jokes and interact with you
+* it can read a handwritten text from any image
+
+### Dependencies
+* speech_recognition 
+
+```pip install SpeechRecognition```
+* pipwin
+
+```pip install pipwin```
+* Pyaudio
+
+```pipwin install pyaudio```
+
+* pyttsx3
+
+```pip install pyttsx3 ```
+*   pyjokes
+
+```pip install pyjokes```
+
+* PyPDF2
+
+
+```pip install PyPDF2```
+*  smtplib
+
+```pip install smtplib```
+
+* openCv-python 
+
+```pip install openCv```
+* Twilio
+
+```pip install openCv```
+
+*  Azure
+
+
