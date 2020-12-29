@@ -4,6 +4,10 @@ import pyttsx3
 
 engine = pyttsx3.init('sapi5')
 def respond(audioString):
+    """
+
+    :rtype: object
+    """
     print(audioString)
     engine.say(audioString)
     engine.runAndWait()
