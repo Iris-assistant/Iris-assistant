@@ -33,20 +33,6 @@ def digital_assistant(data):
         var.set("I am Iris, Your pretty intelligent assistant")
         window.update()
         st.respond("I am Iris, Your pretty intelligent assistant")
-    elif 'good morning' in data:
-        listening = True
-        var1.set(data)
-        window.update()
-        var.set("Good morning dear")
-        window.update()
-        st.respond("Good morning dear")
-    elif "do for me" in data:
-        listening = True
-        var1.set(data)
-        window.update()
-        var.set("I am here to help you, I can write your notes and read them for you, sending emails , or even send SMS for any number your want, Also I can read a whole book just for you. and i can read any text from any image, i can give you weather,time,open google or youtube and search for what you want, Also i am pretty funny, i can tell you a joke and make you smile.")
-        window.update()
-        st.respond("I am here to help you, I can write your notes and read them for you, sending emails , or even send SMS for any number your want, Also I can read a whole book just for you. and i can read any text from any image, i can give you weather,time,open google or youtube and search for what you want, Also i am pretty funny, i can tell you a joke and make you smile.")
 
     elif "time" in data:
         listening = True
@@ -133,7 +119,9 @@ def digital_assistant(data):
 ############################ sendEmail ##################################
 def start_ponit():
 
-
+    st.respond("Good morning dear")
+    var.set("Good morning dear")
+    window.update()
     listening = True
     data = st.listen().lower()
     listening = digital_assistant(data)
@@ -152,11 +140,35 @@ def update(ind):
     label.configure(image=frame)
     window.after(100, update, ind)
 
+################################# new features windows ############################################
+
+def openNewWindow():
+    newWindow = Toplevel(window)
+    newWindow.title("Iris features")
+    newWindow.geometry("500x350")
+    Label(newWindow,text="Iris is here to help you, she can:", height = 3,  width = 500, font = "Courier" , bg = '#EEA47F').pack(pady = 10)
+    Lb1 = Listbox(newWindow ,height = 200,width = 500,  bg = '#ADD8E6',activestyle = 'dotbox', font = "Courier" )
+    Lb1.insert(1, "1.write your notes and read them for you.")
+    Lb1.insert(2, "2.send emails.")
+    Lb1.insert(3, "3.send SMS for any number your want." )
+    Lb1.insert(4, "4.read a whole book just for you.")
+    Lb1.insert(5, "5.read any text from any image.")
+    Lb1.insert(6, "6.give you weather.")
+    Lb1.insert(7, "7.give you time.")
+    Lb1.insert(8, "8.open google or youtube.")
+    Lb1.insert(9,"9.tell you a joke and make you smile:).")
+    Lb1.pack()
+    newWindow.mainloop()
+
+
+
+
+
 
 
 label2 = Label(window, textvariable = var1, font = 3, wraplength = 500, bg = '#EEA47F')
 label2.config(font=("Courier", 15))
-var1.set('User Said:')
+var1.set('you Said:')
 label2.pack()
 
 label1 = Label(window, textvariable = var, font = 3 , wraplength = 500 , bg = '#ADD8E6')
@@ -171,12 +183,14 @@ label = Label(window, width = 620, height = 550 , bg = '#fcfeff')
 label.place(y = 100)
 window.after(0, update, 0)
 
-btn1 = Button(text = 'Click To Talk',height = 2,width = 15,command =start_ponit,  bg = '#031a45' ,	fg = '#fff')
+btn1 = Button(text = 'Click To Talk',height = 2,width = 13,command =start_ponit,  bg = '#031a45' ,	fg = '#fff')
 btn1.config(font=("Courier", 12))
-btn1.place(x = 330 , y =540)
-btn2 = Button(text = 'Good Bye',height = 2,width = 15, command = window.destroy, bg = '#031a45' , fg = '#fff')
+btn1.place(x = 385 , y =540)
+btn2 = Button(text = 'Good Bye',height = 2,width = 13, command = window.destroy, bg = '#031a45' , fg = '#fff')
 btn2.config(font=("Courier", 12))
-btn2.place(x = 110 , y =540)
-
+btn2.place(x = 80 , y =540)
+btn3 = Button(height = 2,width = 13, text ="My features",   command=openNewWindow ,bg = '#031a45' , fg = '#fff')
+btn3.config(font=("Courier", 12))
+btn3.place(x =233, y =540)
 
 window.mainloop()
