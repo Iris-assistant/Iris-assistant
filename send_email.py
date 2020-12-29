@@ -1,6 +1,6 @@
 import speech_text as st
 import smtplib
-contacts={'Rania':'raniaabdullah6600@gmail.com','farah':'farahalzuot97@gmail.com','Saja':'sajanader93@gmail.com'}
+contacts={'Aghead':'aghyadalbalkhi@gmail.com','Rania':'raniaabdullah6600@gmail.com','farah':'farahalzuot97@gmail.com','Saja':'sajanader93@gmail.com'}
 def send_email(var,window,var1):
     try:
         var.set("What should I say?")

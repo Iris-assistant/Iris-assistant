@@ -1,3 +1,4 @@
+# <snippet_imports>
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
@@ -9,39 +10,59 @@ from PIL import Image
 import sys
 import time
 
-subscription_key = "Your Key"
-endpoint = "https://azure-asac-api.cognitiveservices.azure.com/"
+'''
+Authenticates credentials and creates a client.
+'''
 
+subscription_key = "your key"
+endpoint = "Your Endpoint"
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
-remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
 
 '''
-Batch Read File, recognize handwritten text - remote
-This example will extract handwritten text in an image, then print results, line by line.
-This API call can also recognize handwriting (not shown).
+END - Authenticate
 '''
-print("===== Batch Read File - remote =====")
-# Get an image with handwritten text
-remote_image_handw_text_url = "https://fki.tic.heia-fr.ch/static/img/processed-strokes.png"
 
-# Call API with URL and raw response (allows you to get the operation location)
-recognize_handw_results = computervision_client.read(remote_image_handw_text_url,  raw=True)
+import cv2
 
-# Get the operation location (URL with an ID at the end) from the response
-operation_location_remote = recognize_handw_results.headers["Operation-Location"]
-# Grab the ID from the URL
-operation_id = operation_location_remote.split("/")[-1]
+videoCaptureObject = cv2.VideoCapture(0)
+try:
+    while(True):
 
-# Call the "GET" API and wait for it to retrieve the results
+        ret,frame = videoCaptureObject.read()
+        cv2.imshow('CapturingVideo', frame)
+        cv2.imwrite("resources/NewPicture.jpg", frame)
+        if(cv2.waitKey(1) & 0xFF == ord('q')):
+            videoCaptureObject.release()
+            cv2.destroyAllWindows()
+except Exception:
+    pass
+
+
+print("===== Batch Read File - local =====")
+# Get image of handwriting
+local_image_handwritten_path = "resources\\NewPicture.jpg"
+# Open the image
+local_image_handwritten = open(local_image_handwritten_path, "rb")
+
+# Call API with image and raw response (allows you to get the operation location)
+
+recognize_handwriting_results = computervision_client.read_in_stream(local_image_handwritten, raw=True)
+# Get the operation location (URL with ID as last appendage)
+operation_location_local = recognize_handwriting_results.headers["Operation-Location"]
+# Take the ID off and use to get results
+operation_id_local = operation_location_local.split("/")[-1]
+
+# Call the "GET" API and wait for the retrieval of the results
 while True:
-    get_handw_text_results = computervision_client.get_read_result(operation_id)
-    if get_handw_text_results.status not in ['notStarted', 'running']:
+    recognize_handwriting_result = computervision_client.get_read_result(operation_id_local)
+    if recognize_handwriting_result.status not in ['notStarted', 'running']:
         break
     time.sleep(1)
 
-# Print the detected text, line by line
-if get_handw_text_results.status == OperationStatusCodes.succeeded:
-    for text_result in get_handw_text_results.analyze_result.read_results:
+# Print results, line by line
+if recognize_handwriting_result.status == OperationStatusCodes.succeeded:
+    for text_result in recognize_handwriting_result.analyze_result.read_results:
         for line in text_result.lines:
             print(line.text)
+
 print()
