@@ -1,18 +1,28 @@
 import speech_text as st
 import smtplib
-
-def send_email():
+contacts={'Rania':'raniaabdullah6600@gmail.com','farah':'farahalzuot97@gmail.com','Saja':'sajanader93@gmail.com'}
+def send_email(var,window,var1):
     try:
+        var.set("What should I say?")
+        window.update()
         st.respond("What should I say?")
         content = st.listen()
+        var1.set(content)
+        window.update()
+        var.set("whome should i send")
+        window.update()
         st.respond("whome should i send")
-        to = input()
-        sendEmail(to, content)
-        st.respond("Email has been sent !")
+        to = st.listen()
+        if to in contacts:
+            sendEmail(contacts[to], content)
+            st.respond("Email has been sent !")
+        else:
+            st.respond("i could not find the contact !")
     except Exception as e:
         print(e)
+        var.set("I am not able to send this email")
+        window.update()
         st.respond("I am not able to send this email")
-
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
