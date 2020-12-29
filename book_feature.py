@@ -5,7 +5,9 @@ import pyttsx3
 
 
 
-def read_book():
+def read_book(var,window):
+    var.set("Here you go to book shelf\n")
+    window.update()
     st.respond("Here you go to book shelf\n")
     book = askopenfilename()
     reader = PyPDF2.PdfFileReader(book)
