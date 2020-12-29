@@ -33,6 +33,13 @@ def digital_assistant(data):
         var.set("I am Iris, Your pretty intelligent assistant")
         window.update()
         st.respond("I am Iris, Your pretty intelligent assistant")
+    elif 'good morning' in data:
+        listening = True
+        var1.set(data)
+        window.update()
+        var.set("Good morning dear")
+        st.respond("Good morning dear")
+        window.update()
 
     elif "time" in data:
         listening = True
@@ -40,13 +47,13 @@ def digital_assistant(data):
         window.update()
         gf.get_time(var,window)
 
-    elif 'YouTube' in data:
+    elif 'youtube' in data:
         listening = True
         var1.set(data)
         window.update()
         gf.open_youtube(var,window,var1)
 
-    elif 'Google' in data:
+    elif 'google' in data:
         var1.set(data)
         window.update()
         listening = True
@@ -119,9 +126,7 @@ def digital_assistant(data):
 ############################ sendEmail ##################################
 def start_ponit():
 
-    st.respond("Good morning dear")
-    var.set("Good morning dear")
-    window.update()
+
     listening = True
     data = st.listen().lower()
     listening = digital_assistant(data)
