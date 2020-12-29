@@ -33,7 +33,13 @@ def digital_assistant(data):
         var.set("I am Iris, Your pretty intelligent assistant")
         window.update()
         st.respond("I am Iris, Your pretty intelligent assistant")
-
+    elif 'good morning' in data:
+        listening = True
+        var1.set(data)
+        window.update()
+        var.set("Good morning dear")
+        window.update()
+        st.respond("Good morning dear")
     elif "do for me" in data:
         listening = True
         var1.set(data)
@@ -127,9 +133,7 @@ def digital_assistant(data):
 ############################ sendEmail ##################################
 def start_ponit():
 
-    st.respond("Good morning dear")
-    var.set("Good morning dear")
-    window.update()
+
     listening = True
     data = st.listen().lower()
     listening = digital_assistant(data)
