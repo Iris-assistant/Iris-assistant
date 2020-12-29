@@ -14,7 +14,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
 window = Tk()
-window.geometry('600x600')
+window.geometry('600x650')
 window.configure(background='#fcfeff')
 global var
 global var1
