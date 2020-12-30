@@ -13,11 +13,11 @@ def send_email(var,window,var1):
         window.update()
         st.respond("whome should i send")
         to = st.listen()
-        if to in contacts:
-            sendEmail(contacts[to], content)
-            st.respond("Email has been sent !")
-        else:
+        while to not in contacts:
             st.respond("i could not find the contact !")
+            to = st.listen()
+        sendEmail(contacts[to], content)
+        st.respond("Email has been sent !")
     except Exception as e:
         print(e)
         var.set("I am not able to send this email")
