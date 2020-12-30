@@ -4,7 +4,6 @@ import PyPDF2
 import pyttsx3
 
 
-
 def read_book(var,window):
     var.set("Here you go to book shelf\n")
     window.update()
@@ -16,5 +15,9 @@ def read_book(var,window):
         page = reader.getPage(num)
         text = page.extractText()
         player = pyttsx3.init()
+        voices = player.getProperty('voices')
+        player.setProperty('voice', voices[1].id)
+        newVoiceRate = 145
+        player.setProperty('rate', newVoiceRate)
         player.say(text)
         player.runAndWait()
