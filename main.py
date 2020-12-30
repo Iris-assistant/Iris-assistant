@@ -57,13 +57,13 @@ def digital_assistant(data):
         window.update()
         gf.open_google(var,window,var1)
 
-    elif "write note" in data:
+    elif "write" in data:
         var1.set(data)
         window.update()
         nf.write_note(var,window,var1)
 
 
-    elif "show note" in data:
+    elif "show" in data:
         var1.set(data)
         window.update()
         nf.show_note(var,window)
@@ -113,6 +113,7 @@ def digital_assistant(data):
         var1.set(data)
         window.update()
         print('Listening stopped')
+        window.destroy()
     else:
         st.respond("Sorry! can you repeat .. ")
         data = st.listen().lower()

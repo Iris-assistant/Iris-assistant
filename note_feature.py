@@ -11,17 +11,16 @@ def write_note(var,window,var1):
     file = open('iris.txt', 'w')
     var.set("Sir, Should i include date and time")
     window.update()
-    st.respond("Sir, Should i include date and time")
-    snfm = st.listen()
-    var1.set(snfm)
+
+    strTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+    file.write(strTime)
+    file.write(" :- ")
+    file.write(note)
+    st.respond("The Note have Been saved")
+    var.set("The Note have Been saved")
     window.update()
-    if 'yes' in snfm or 'sure' in snfm:
-        strTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-        file.write(strTime)
-        file.write(" :- ")
-        file.write(note)
-    else:
-        file.write(note)
+
+
 def show_note(var,window):
     var.set("Showing Notes")
     window.update()
