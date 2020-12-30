@@ -7,6 +7,7 @@ import note_feature as nf
 import book_feature as bf
 import send_email as se
 import sms_feature as sf
+import azure_api as azure_a
 import threading
 
 engine = pyttsx3.init('sapi5')
@@ -101,6 +102,10 @@ def digital_assistant(data):
         window.update()
         sf.send_sms()
 
+    elif 'image' in data:
+        var1.set(data)
+        window.update()
+        azure_a.read_image_text()
 
     elif "stop" in data:
         var1.set(data)
