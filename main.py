@@ -13,6 +13,8 @@ import threading
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
+newVoiceRate = 145
+engine.setProperty('rate',newVoiceRate)
 
 window = Tk()
 window.geometry('600x650')
