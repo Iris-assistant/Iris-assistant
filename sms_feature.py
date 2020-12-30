@@ -10,8 +10,8 @@ def send_sms():
         massage = input('enter a msg')
         sms_to =accounts[name]
         print(sms_to)
-        account_sid = 'Your sid Key'
-        auth_token = ' Your auth_token'
+        account_sid = 'Your sid'
+        auth_token = 'Your auth'
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(

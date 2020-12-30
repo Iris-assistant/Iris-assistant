@@ -1,13 +1,13 @@
-import time
 import requests
 from tkinter import *
-import speech_recognition as sr
 import pyttsx3
 import speech_text as st
 import general_features as gf
 import note_feature as nf
 import book_feature as bf
 import send_email as se
+import sms_feature as sf
+import threading
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -27,14 +27,12 @@ var1 = StringVar()
 def digital_assistant(data):
 
     if "who are you" in data:
-        listening = True
         var1.set(data)
         window.update()
         var.set("I am Iris, Your pretty intelligent assistant")
         window.update()
         st.respond("I am Iris, Your pretty intelligent assistant")
     elif 'good morning' in data:
-        listening = True
         var1.set(data)
         window.update()
         var.set("Good morning dear")
@@ -42,13 +40,11 @@ def digital_assistant(data):
         window.update()
 
     elif "time" in data:
-        listening = True
         var1.set(data)
         window.update()
         gf.get_time(var,window)
 
     elif 'youtube' in data:
-        listening = True
         var1.set(data)
         window.update()
         gf.open_youtube(var,window,var1)
@@ -56,38 +52,32 @@ def digital_assistant(data):
     elif 'google' in data:
         var1.set(data)
         window.update()
-        listening = True
         gf.open_google(var,window,var1)
 
     elif "write note" in data:
-        listening = True
         var1.set(data)
         window.update()
         nf.write_note(var,window,var1)
 
 
     elif "show note" in data:
-        listening = True
         var1.set(data)
         window.update()
         nf.show_note(var,window)
 
     elif 'joke' in data:
-        listening = True
         var1.set(data)
         window.update()
         gf.get_joke(var,window)
 
 
     elif 'book' in data:
-        listening = True
         var1.set(data)
         window.update()
         bf.read_book(var,window)
 
 
     elif 'weather' in data:
-        listening = True
         var1.set(data)
         window.update()
         Key = '71b466b89b734b6d8c5566794767010f'
@@ -99,44 +89,35 @@ def digital_assistant(data):
         var.set(f'the weather in {city_name} is {description} and the temprature is {tempreture}C.')
         window.update()
         st.respond(f'the weather in {city_name} is {description} and the temprature is {tempreture}C.')
-        return (f'the weather in {city_name} is {description} and the temprature is {tempreture}C.')
-
 
 
     elif 'email' in data:
-        listening = True
         var1.set(data)
         window.update()
         se.send_email(var,window,var1)
 
+    elif 'sms' in data:
+        var1.set(data)
+        window.update()
+        sf.send_sms()
+
 
     elif "stop" in data:
-        listening = False
         var1.set(data)
         window.update()
         print('Listening stopped')
-        return listening
     else:
-        listening = True
         st.respond("Sorry! can you repeat .. ")
-        data = st.listen()
+        data = st.listen().lower()
         digital_assistant(data)
-    return listening
 
 ############################ sendEmail ##################################
 def start_ponit():
 
-
-    listening = True
     data = st.listen().lower()
-    listening = digital_assistant(data)
-
-
-
+    digital_assistant(data)
 
 ################################# Tkinter ############################################
-
-
 
 
 def update(ind):
@@ -188,7 +169,7 @@ label = Label(window, width = 620, height = 550 , bg = '#fcfeff')
 label.place(y = 100)
 window.after(0, update, 0)
 
-btn1 = Button(text = 'Click To Talk',height = 2,width = 13,command =start_ponit,  bg = '#031a45' ,	fg = '#fff')
+btn1 = Button(text = 'Click To Talk',height = 2,width = 13,command=start_ponit,  bg = '#031a45' ,	fg = '#fff')
 btn1.config(font=("Courier", 12))
 btn1.place(x = 385 , y =540)
 btn2 = Button(text = 'Good Bye',height = 2,width = 13, command = window.destroy, bg = '#031a45' , fg = '#fff')

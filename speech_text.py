@@ -8,9 +8,12 @@ def respond(audioString):
 
     :rtype: object
     """
-    print(audioString)
-    engine.say(audioString)
-    engine.runAndWait()
+    try:
+        print(audioString)
+        engine.say(audioString)
+        engine.runAndWait()
+    except Exception:
+        pass
 
 
 def listen():
